@@ -5,7 +5,7 @@
 
 > Example 1
 
-'''C++
+```C++
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -33,5 +33,5 @@ int main()
     cout << Sum(8.1, 5.5) << endl;
     cout << Sum(a, b) << endl;
 }
-'''
+```
 
