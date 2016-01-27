@@ -97,3 +97,41 @@ void main()
   이 선언으로 컴파일러는 test클래스를 미리 생성한다. 이런 타입의 객체를 선언하지 않는다해도 컴파일러는 클래스 선언과 클래스 소속의 멤버 함수들을 모두 구체화해 둔다.
   
 ### - 클래스 템플릿 부분 특수화
+  클래스내 일부만 특수화도 가능하다.
+  
+  > Example 4
+  
+  ```C++
+#include <iostream>
+
+using namespace std;
+
+// Base 템플릿 클래스
+template<typename T1, typename T2>
+class X
+{
+public:
+    X(){ cout << "Base Template" << endl; }
+} ;
+
+//partial specialization
+template<typename T1>
+class X<T1, int>
+{
+public:
+    X() { cout << "T1, int Template" << endl; }
+} ; //C2989 here
+
+int main()
+{
+    X<char, char> xcc ;
+    X<char, int> xii ;
+
+    return 0 ;
+}
+```
+
+  class X<T1, int>에서 int타입을 특정해서, 템플릿을 사용하고 있다. 오래된 컴파일러 버전의 경우 부분 특수화를 지원하지 않기도 한다.
+  예를들면 Visual C++ 5.0. 특수화란 간단히 생각하면 오버로딩이라 봐도 된다.
+  
+  
