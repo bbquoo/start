@@ -47,6 +47,7 @@ hello joinc
   클래스 템플릿은 클래스의 틀이 되는 용도임. 구조와 구현 알고리즘을 동일하되 멤버들의 타입만 다를 경우 사용 가능함. 
   
 > Example 2
+
 ```C++
 #include <iostream>
 using namespace std;
