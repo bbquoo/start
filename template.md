@@ -43,3 +43,43 @@ int main()
 hello joinc
 ```
 
+## 2. 클래스 템플릿
+  클래스 템플릿은 클래스의 틀이 되는 용도임. 구조와 구현 알고리즘을 동일하되 멤버들의 타입만 다를 경우 사용 가능함. 
+  
+> Example 2
+```C++
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class PosValue
+{
+public:
+	PosValue(int ax, int ay, T av) : m_X(ax), m_Y(ay), m_Value(av) { }
+	void OutValue();
+private:
+	int m_X, m_Y;
+	T m_Value;
+};
+
+template <typename T>
+void PosValue<T>::OutValue()
+{
+	printf("x: %d, y: %d\n", m_X, m_Y);
+	cout << m_Value << endl;
+}
+
+void main()
+{
+	PosValue<int> iv(1, 1, 2);
+	PosValue<char> cv(5, 1, 'C');
+	PosValue<double> dv(30, 2, 3.14);
+	iv.OutValue();
+	cv.OutValue();
+	dv.OutValue();
+
+	getchar();
+	return;
+}
+```
+  위 예시처럼 클래스 생성자를 호출시 필요한 인수의 타입을 '<>'에 써야한다.
