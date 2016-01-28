@@ -138,3 +138,28 @@ int main()
 ## * 추가
 ### - auto
      특정 type대신 auto를 붙여주면 자동으로 자료형을 추론한다. 그래서 변수일 경우 초기화가 필수.
+### - decltype
+     함수의 return type이 모호할때 type대신 decltype을 쓰면 컴파일러가 추론한다.
+     
+     > example 5
+     
+     ```C++
+     
+     #include <iostream>
+     using namespace std;
+     
+     template<typename T, typename P>
+     auto add(T t, P p) ->decltype(t + p)
+     {
+       return t + p;
+     }
+     
+     int main()
+     {
+        cout<< add(3.5, 2) << endl;
+        return 0;
+     }
+     ```
+    
+# 결론
+  템플릿 타입 추론은 어렵다!!!!!!
