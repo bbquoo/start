@@ -147,23 +147,23 @@ int main()
      
 > example 5
      
-     ```C++
+```C++
      
-     #include <iostream>
-     using namespace std;
+#include <iostream>
+using namespace std;
      
-     template<typename T, typename P>
-     auto add(T t, P p) ->decltype(t + p)
-     {
-       return t + p;
-     }
+template<typename T, typename P>
+auto add(T t, P p) ->decltype(t + p)
+{
+  return t + p;
+}
      
-     int main()
-     {
-        cout<< add(3.5, 2) << endl;
-        return 0;
-     }
-     ```
+int main()
+{
+    cout<< add(3.5, 2) << endl;
+   return 0;
+}
+```
     
 # 결론
   템플릿 타입 추론은 어렵다!!!!!!
