@@ -164,6 +164,20 @@ int main()
    return 0;
 }
 ```
-    
+
+### 템플릿 타입 추론
+
+```C++
+
+template <typename T>
+void f(ParamType param);
+
+f(expr);
+
+```
+
+T와 ParamType은 항상 같지 않다. (const나 & 덕분에)
+
+
 # 결론
   템플릿 타입 추론은 어렵다!!!!!!
