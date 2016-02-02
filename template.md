@@ -177,6 +177,14 @@ f(expr);
 ```
 
 T와 ParamType은 항상 같지 않다. (const나 & 덕분에)
+T의 타입은 expr에 영향을 받으면서 ParamType에도 영향을 받는다.
+
+#### Case 1. ParamType이 참조이거나 포인터이고 전역 참조는 아닌 경우
+
+1-1 만약 expr의 타입이 참조라면 참조 부분은 무시
+1-2 그 때 ParamType과 다른 expr타입을 패턴 매치해 T를 결정
+
+>example 1
 
 
 # 결론
