@@ -176,14 +176,13 @@ f(expr);
 
 ```
 
-T와 ParamType은 항상 같지 않다. (const나 & 덕분에)
-
-T의 타입은 expr에 영향을 받으면서 ParamType에도 영향을 받는다.
+T와 ParamType은 항상 같지 않다. (const나 & 덕분에)  
+T의 타입은 expr에 영향을 받으면서 ParamType에도 영향을 받는다.  
 
 #### Case 1. ParamType이 참조이거나 포인터이고 전역 참조는 아닌 경우
 
-1-1 만약 expr의 타입이 참조라면 참조 부분은 무시
-1-2 그 때 ParamType과 다른 expr타입을 패턴 매치해 T를 결정
+1-1 만약 expr의 타입이 참조라면 참조 부분은 무시  
+1-2 그 때 ParamType과 다른 expr타입을 패턴 매치해 T를 결정  
 
 >example 1
 
@@ -204,8 +203,8 @@ f(rx); //T is const int, paramtype is const int&
 
 #### Case 2. ParamType이 전역 참조인 경우
 
-2-1. 만약 expr이 lvalue라면 T와 ParamType은 lvalue참조로 추론된다.
-2-2. 만약 expr이 rvalue라면 case1의 규칙이 적용된다.
+2-1. 만약 expr이 lvalue라면 T와 ParamType은 lvalue참조로 추론된다.  
+2-2. 만약 expr이 rvalue라면 case1의 규칙이 적용된다.  
 
 >example 2
 
@@ -227,8 +226,8 @@ f(27);   //27 is rvalue, T is int. paramtype is int&&.   <-2-2의 경우.
 
 #### Case 3. ParamType이 참조도 아니고 포인터도 아닐 때
 
-3-1. expr의 타입이 참조라면 참조를 무시한다.
-3-2. expr의 참조성을 무시했다면, expr의 const도 무시한다. volatile도 무시한다.
+3-1. expr의 타입이 참조라면 참조를 무시한다.  
+3-2. expr의 참조성을 무시했다면, expr의 const도 무시한다. volatile도 무시한다.  
 
 ```C++
 
