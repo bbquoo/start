@@ -177,6 +177,7 @@ f(expr);
 ```
 
 T와 ParamType은 항상 같지 않다. (const나 & 덕분에)
+
 T의 타입은 expr에 영향을 받으면서 ParamType에도 영향을 받는다.
 
 #### Case 1. ParamType이 참조이거나 포인터이고 전역 참조는 아닌 경우
@@ -185,6 +186,66 @@ T의 타입은 expr에 영향을 받으면서 ParamType에도 영향을 받는�
 1-2 그 때 ParamType과 다른 expr타입을 패턴 매치해 T를 결정
 
 >example 1
+
+```C++
+
+template<typename T>
+void f(T& param);    //param is a reference
+
+int x = 27;
+const int cx = x;
+const int& rx = x;
+
+f(x); //T is int, paramtype is int&
+f(cx); //T is const int, paramtype is const int&
+f(rx); //T is const int, paramtype is const int&
+
+```
+
+#### Case 2. ParamType이 전역 참조인 경우
+
+2-1. 만약 expr이 lvalue라면 T와 ParamType은 lvalue참조로 추론된다.
+2-2. 만약 expr이 rvalue라면 case1의 규칙이 적용된다.
+
+>example 2
+
+```C++
+
+template<typename T>
+void f(T&& param);
+
+int x = 27;
+const int cx = x;
+const int& rx = x;
+
+f(x);    //x is lvalue, T is int&. paramtype is int&.
+f(cx);   //cx is lvalue, T is const int&. paramtype is const int&.
+f(rx);   //rx is lvalue, T is const int&. paramtype is const int&.
+f(27);   //27 is rvalue, T is int. paramtype is int&&.   <-2-2의 경우.
+
+```
+
+#### Case 3. ParamType이 참조도 아니고 포인터도 아닐 때
+
+3-1. expr의 타입이 참조라면 참조를 무시한다.
+3-2. expr의 참조성을 무시했다면, expr의 const도 무시한다. volatile도 무시한다.
+
+```C++
+
+template<typename T>
+void f(T param);
+
+int x = 27;
+const int cx = x;
+const int& rx = x;
+
+f(x);   //T and paramtype are both int
+f(cx);  //T and paramtype are both int
+f(rx);  //T and paramtype are both int
+
+```
+
+위경우는 값에 의한 전달, 복사가 이루어졌기 때문에 원래 가지고 있던 상수성들을 가져가지 않기 때문에 위같은 결과가 나온다.
 
 
 # 결론
